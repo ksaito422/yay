@@ -26,3 +26,29 @@
 #         Configure 'sugoi' as 'oniyabai'
 #         Configure 'foo' as 'iihanashi'
 #         Configure 'hoge' as 'uhyo-'
+
+class Args
+  def calc(str, num, *length)
+    repeat_str = str.to_s * num
+    if length.length > 0
+      Array.new(length[0], repeat_str)
+    else
+      Array.new(num, repeat_str)
+    end
+  end
+
+  def count_object(array: [], keyword:)
+    array.count(keyword)
+  end
+
+  def configure(benri:, sugoi:, **kwrest)
+    puts "Configure 'benri' as '#{benri}'"
+    puts "Configure 'sugoi' as '#{sugoi}'"
+    kw = kwrest.sort.to_h
+    kw.each do |k, v|
+      if k.to_s.include?('c_')
+        puts "Configure '#{k.to_s.delete('c_')}' as '#{v}'"
+      end
+    end
+  end
+end
